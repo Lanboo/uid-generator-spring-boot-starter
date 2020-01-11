@@ -4,14 +4,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.github.wujun234</groupId>
+    <groupId>com.xych</groupId>
     <artifactId>uid-generator-spring-boot-starter</artifactId>
     <version>1.0.2.RELEASE</version>
     <packaging>jar</packaging>
 
     <name>uid-generator-spring-boot-starter</name>
     <description>An unique id generator based on baidu uid-generator</description>
-    <url>https://github.com/wujun234/uid-generator-spring-boot-starter</url>
+    <url>https://github.com/Lanboo/uid-generator-spring-boot-starter</url>
 
     <!-- Properties -->
     <properties>
@@ -28,15 +28,15 @@
     </licenses>
 
     <scm>
-        <url>https://github.com/wujun234/uid-generator-spring-boot-starter</url>
-        <connection>https://github.com/wujun234/uid-generator-spring-boot-starter.git</connection>
-        <developerConnection>https://github.com/wujun234</developerConnection>
+        <url>https://github.com/Lanboo/uid-generator-spring-boot-starter</url>
+        <connection>https://github.com/Lanboo/uid-generator-spring-boot-starter.git</connection>
+        <developerConnection>https://github.com/Lanboo</developerConnection>
     </scm>
 
     <developers>
         <developer>
-            <name>wujun</name>
-            <email>wujun234@gmail.com</email>
+            <name>Lanboo</name>
+            <email>lanbooxych@gmail.com</email>
         </developer>
     </developers>
 

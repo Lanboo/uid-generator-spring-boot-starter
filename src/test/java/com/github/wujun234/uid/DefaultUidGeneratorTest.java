@@ -7,7 +7,6 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import com.github.wujun234.uid.impl.DefaultUidGenerator;
 import org.apache.commons.lang.StringUtils;
 import org.junit.Assert;
 import org.junit.Ignore;
@@ -17,6 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.xych.uid.UidGenerator;
+import com.xych.uid.impl.DefaultUidGenerator;
 
 /**
  * Test for {@link DefaultUidGenerator}
