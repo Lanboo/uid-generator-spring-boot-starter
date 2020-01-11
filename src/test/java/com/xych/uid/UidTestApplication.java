@@ -1,4 +1,4 @@
-package com.github.wujun234.uid;
+package com.xych.uid;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

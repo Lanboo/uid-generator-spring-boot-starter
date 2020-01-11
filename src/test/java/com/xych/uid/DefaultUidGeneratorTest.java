@@ -1,19 +1,5 @@
-package com.github.wujun234.uid;
+package com.xych.uid;
 
-import org.apache.commons.lang.StringUtils;
-import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import com.xych.uid.UidGenerator;
-import com.xych.uid.impl.CachedUidGenerator;
-
-import javax.annotation.Resource;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -21,8 +7,21 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.apache.commons.lang.StringUtils;
+import org.junit.Assert;
+import org.junit.Ignore;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.xych.uid.UidGenerator;
+import com.xych.uid.impl.DefaultUidGenerator;
+
 /**
- * Test for {@link CachedUidGenerator}
+ * Test for {@link DefaultUidGenerator}
  * 
  * @author yutianbao
  * @author wujun
@@ -30,21 +29,19 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Ignore
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.NONE)
-public class CachedUidGeneratorTest {
-    private static final int SIZE = 7000000; // 700w
-    private static final boolean VERBOSE = false;
+public class DefaultUidGeneratorTest {
+    private static final int SIZE = 100000; // 10w
+    private static final boolean VERBOSE = true;
     private static final int THREADS = Runtime.getRuntime().availableProcessors() << 1;
 
-    @Resource
-    private UidGenerator cachedUidGenerator;
+    @Autowired
+    private UidGenerator defaultUidGenerator;
 
     /**
      * Test for serially generate
-     * 
-     * @throws IOException
      */
     @Test
-    public void testSerialGenerate() throws IOException {
+    public void testSerialGenerate() {
         // Generate UID serially
         Set<Long> uidSet = new HashSet<>(SIZE);
         for (int i = 0; i < SIZE; i++) {
@@ -59,10 +56,9 @@ public class CachedUidGeneratorTest {
      * Test for parallel generate
      * 
      * @throws InterruptedException
-     * @throws IOException
      */
     @Test
-    public void testParallelGenerate() throws InterruptedException, IOException {
+    public void testParallelGenerate() throws InterruptedException {
         AtomicInteger control = new AtomicInteger(-1);
         Set<Long> uidSet = new ConcurrentSkipListSet<>();
 
@@ -81,7 +77,7 @@ public class CachedUidGeneratorTest {
             thread.join();
         }
 
-        // Check generate 700w times
+        // Check generate 10w times
         Assert.assertEquals(SIZE, control.get());
 
         // Check UIDs are all unique
@@ -89,7 +85,7 @@ public class CachedUidGeneratorTest {
     }
 
     /**
-     * Woker run
+     * Worker run
      */
     private void workerRun(Set<Long> uidSet, AtomicInteger control) {
         for (;;) {
@@ -106,12 +102,9 @@ public class CachedUidGeneratorTest {
      * Do generating
      */
     private void doGenerate(Set<Long> uidSet, int index) {
-        long uid = cachedUidGenerator.getUID();
-        String parsedInfo = cachedUidGenerator.parseUID(uid);
-        boolean existed = !uidSet.add(uid);
-        if (existed) {
-            System.out.println("Found duplicate UID " + uid);
-        }
+        long uid = defaultUidGenerator.getUID();
+        String parsedInfo = defaultUidGenerator.parseUID(uid);
+        uidSet.add(uid);
 
         // Check UID is positive, and can be parsed
         Assert.assertTrue(uid > 0L);
@@ -125,7 +118,7 @@ public class CachedUidGeneratorTest {
     /**
      * Check UIDs are all unique
      */
-    private void checkUniqueID(Set<Long> uidSet) throws IOException {
+    private void checkUniqueID(Set<Long> uidSet) {
         System.out.println(uidSet.size());
         Assert.assertEquals(SIZE, uidSet.size());
     }
