@@ -15,7 +15,7 @@
  */
 package com.xych.uid.worker;
 
-import org.apache.commons.lang.math.RandomUtils;
+import org.apache.commons.lang3.RandomUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
@@ -77,7 +77,7 @@ public class DisposableWorkerIdAssigner implements WorkerIdAssigner {
         } else {
             workerNodeEntity.setType(WorkerNodeType.ACTUAL.value());
             workerNodeEntity.setHostName(NetUtils.getLocalAddress());
-            workerNodeEntity.setPort(System.currentTimeMillis() + "-" + RandomUtils.nextInt(100000));
+            workerNodeEntity.setPort(System.currentTimeMillis() + "-" + RandomUtils.nextInt(100000, 1000000));
         }
 
         return workerNodeEntity;
@@ -88,10 +88,10 @@ public class DisposableWorkerIdAssigner implements WorkerIdAssigner {
         workerNodeEntity.setType(WorkerNodeType.FAKE.value());
         if (DockerUtils.isDocker()) {
             workerNodeEntity.setHostName(DockerUtils.getDockerHost());
-            workerNodeEntity.setPort(DockerUtils.getDockerPort() + "-" + RandomUtils.nextInt(100000));
+            workerNodeEntity.setPort(DockerUtils.getDockerPort() + "-" + RandomUtils.nextInt(100000, 1000000));
         }else {
             workerNodeEntity.setHostName(NetUtils.getLocalAddress());
-            workerNodeEntity.setPort(System.currentTimeMillis() + "-" + RandomUtils.nextInt(100000));
+            workerNodeEntity.setPort(System.currentTimeMillis() + "-" + RandomUtils.nextInt(100000, 1000000));
         }
         return workerNodeEntity;
     }
