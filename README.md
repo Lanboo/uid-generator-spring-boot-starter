@@ -1,4 +1,4 @@
-uid-generator-spring-boot-starter
+2020-01-01uid-generator-spring-boot-starter
 ==========================
 基于 [百度UidGenerator](https://github.com/baidu/uid-generator), 做了以下改动：
 - 改造为spring-boot-starter的形式，不用部署为分布式，直接建表、在项目中引入，即可使用
