@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,9 +21,9 @@ import com.xych.uid.exception.UidGenerateException;
  * Represents a unique id generator.
  *
  * @author yutianbao
+ * @author Lanboo
  */
 public interface UidGenerator {
-
     /**
      * Get a unique ID
      *
@@ -33,6 +33,15 @@ public interface UidGenerator {
     long getUID() throws UidGenerateException;
 
     /**
+     * Get a unique ID toString
+     * @return
+     * @throws UidGenerateException
+     * @author 晓月残魂
+     * @date 2020年1月12日上午1:16:53
+     */
+    String getUIDStr() throws UidGenerateException;
+
+    /**
      * Parse the UID into elements which are used to generate the UID. <br>
      * Such as timestamp & workerId & sequence...
      *
@@ -40,5 +49,4 @@ public interface UidGenerator {
      * @return Parsed info
      */
     String parseUID(long uid);
-
 }
