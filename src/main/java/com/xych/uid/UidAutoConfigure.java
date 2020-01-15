@@ -23,7 +23,7 @@ import com.xych.uid.worker.WorkerIdAssigner;
  */
 @Configuration
 @ConditionalOnClass({ DefaultUidGenerator.class, CachedUidGenerator.class })
-@MapperScan({ "com.github.wujun234.uid.worker.dao" })
+@MapperScan({ "com.xych.uid.worker.dao" })
 @EnableConfigurationProperties(UidProperties.class)
 public class UidAutoConfigure {
 
